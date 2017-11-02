@@ -59,6 +59,6 @@ endfunc
 
 augroup goobook_address
   au!
-  au FileType mail,notmuch-compose setlocal completefunc=goobook_complete#Complete
-  au BufRead /tmp/mutt-* setlocal completefunc=goobook_complete#Complete
+  au FileType mail,notmuch-compose setlocal omnifunc=goobook_complete#Complete
+  au BufRead /tmp/mutt-*,/tmp/neomutt-* setlocal omnifunc=goobook_complete#Complete
 augroup END
