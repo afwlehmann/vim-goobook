@@ -29,7 +29,9 @@ function! goobook_complete#Complete(findstart, base)
         endwhile
         return idx
     else
-        if exists("g:goobookrc")
+        if exists("g:goobookprg")
+            let goobook=g:goobookprg
+        elseif exists("g:goobookrc")
             let goobook="goobook -c " . g:goobookrc
         else
             let goobook="goobook"
