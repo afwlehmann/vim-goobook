@@ -2,7 +2,7 @@
 
 This is a vim plugin to support email address completion by making use of [goobook][1] to query [Google Contacts][2] for managed email addresses.
 
-Note that this plugin is heavily based on the original [gist][1] by Matthew Horan.
+Note that this plugin is heavily based on the original [gist][3] by Matthew Horan.
 
 ## Authors
 
@@ -11,4 +11,4 @@ Note that this plugin is heavily based on the original [gist][1] by Matthew Hora
 
 [1]: https://gitlab.com/goobook/goobook
 [2]: http://contacts.google.com
-[3]: http://recursivedream.com/blog/2012/auto-completing-google-contacts-in-vim/
+[3]: https://gist.github.com/mhoran/1667695
