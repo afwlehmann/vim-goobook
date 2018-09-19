@@ -25,6 +25,7 @@ AD contacts):
 
 - Alexander Lehmann <afwlehmann@googlemail.com>
 - Matthew Horan <matt@matthoran.com>
+- Matteo Landi <matteo@matteolandi.net>
 
 [1]: https://gitlab.com/goobook/goobook
 [2]: http://contacts.google.com
