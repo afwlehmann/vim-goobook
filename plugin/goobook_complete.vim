@@ -5,6 +5,7 @@
 "
 " Authors: Alexander Lehmann <afwlehmann@googlemail.com>
 "          Matthew Horan <matt@matthoran.com>
+"          Matteo Landi <matteo@matteolandi.net>
 
 if exists("g:goobook_address")
   finish
