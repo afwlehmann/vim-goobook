@@ -56,17 +56,17 @@ function! goobook_complete#Complete(findstart, base)
         if v:shell_error
             return []
         else
-            return goobook_complete#Format(goobook_complete#Trim(res))
+            return <SID>format_contacts(<SID>parse_contacts(res))
         endif
     endif
 endfunc
 
-function! goobook_complete#Trim(res)
+function! s:parse_contacts(res)
     let trim="sed '/^$/d' | grep -v '(group)$' | cut -f1,2"
     return split(system(trim, a:res), '\n')
 endfunc
 
-function! goobook_complete#Format(contacts)
+function! s:format_contacts(contacts)
     let contacts=map(copy(a:contacts), "split(v:val, '\t')")
     let ret=[]
     for [email, name] in contacts
