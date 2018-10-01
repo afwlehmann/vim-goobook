@@ -30,7 +30,7 @@ function! goobook_complete#Complete(findstart, base)
                 " multiple email addresses per line: move two chars ahead, one
                 " for the comma and one for the whitespace right after it
                 return idx + 2
-            elseif c == '\t'
+            elseif c =~ '\t'
                 " leading tab at the beginning of a new address line: move one
                 " char ahead
                 return idx + 1
