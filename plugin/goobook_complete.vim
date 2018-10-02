@@ -46,8 +46,11 @@ function! goobook_complete#Complete(findstart, base)
 endfunc
 
 function! goobook_complete#Trim(res)
-    let trim="sed '/^$/d' | grep -v '(group)$' | cut -f1,2"
-    return split(system(trim, a:res), '\n')
+    let splits = split(a:res, '\r\?\n')
+    let splits = filter(splits, 'v:val != ""')                 " Remove empty lines
+    let splits = filter(splits, 'v:val !~ "(group)$"')         " Remove all the 'group' contacts
+    return map(splits, "join(split(v:val, '\t')[0:1], '\t')")  " For each contact, keep the first
+                                                               " two tab-separated chunks
 endfunc
 
 function! goobook_complete#Format(contacts)
