@@ -5,6 +5,7 @@
 "
 " Authors: Alexander Lehmann <afwlehmann@googlemail.com>
 "          Matthew Horan <matt@matthoran.com>
+"          Matteo Landi <matteo@matteolandi.net>
 
 if exists("g:goobook_address")
   finish
@@ -20,11 +21,27 @@ function! goobook_complete#Complete(findstart, base)
         while idx > 0
             let idx -= 1
             let c = line[idx]
-            " break on header and previous email
-            if c == ':' || c == '>'
+
+            if c == ':'
+                " email header: move two chars ahead, one for the colon and one
+                " for the whitespace right after it
                 return idx + 2
-            else
-                continue
+            elseif c == ','
+                " multiple email addresses per line: move two chars ahead, one
+                " for the comma and one for the whitespace right after it
+                return idx + 2
+            elseif c =~ '\t'
+                " leading tab at the beginning of a new address line: move one
+                " char ahead
+                return idx + 1
+            elseif c == ' '
+                " whitespace: if the rest of the line is made of all whitespace
+                " chars return the next from the current one, otherwise keep on
+                " searching
+                let remaining = line[0:idx]
+                if remaining =~ '^\s*$'
+                    return idx + 1
+                endif
             endif
         endwhile
         return idx
@@ -40,12 +57,12 @@ function! goobook_complete#Complete(findstart, base)
         if v:shell_error
             return []
         else
-            return goobook_complete#Format(goobook_complete#Trim(res))
+            return <SID>format_contacts(<SID>parse_contacts(res))
         endif
     endif
 endfunc
 
-function! goobook_complete#Trim(res)
+function! s:parse_contacts(res)
     let splits = split(a:res, '\r\?\n')
     let splits = filter(splits, 'v:val != ""')                 " Remove empty lines
     let splits = filter(splits, 'v:val !~ "(group)$"')         " Remove all the 'group' contacts
@@ -53,7 +70,7 @@ function! goobook_complete#Trim(res)
                                                                " two tab-separated chunks
 endfunc
 
-function! goobook_complete#Format(contacts)
+function! s:format_contacts(contacts)
     let contacts=map(copy(a:contacts), "split(v:val, '\t')")
     let ret=[]
     for [email, name] in contacts
