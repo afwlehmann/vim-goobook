@@ -14,7 +14,7 @@ configuration file (i.e. specifying the `-c` flag):
 
     let g:goobookrc = '~/.goobookrc.account1'
 
-`g:goobookprg` (or it's buffer variant `b:goobookprg`) can instead be used to
+`g:goobookprg` (or its buffer variant `b:goobookprg`) can instead be used to
 tell the plugin to invoke a completely different program than `goobook` (of
 course you might want to set this to the name of a program with compatible
 output, like [aadbook][4] for querying Azure AD contacts):
